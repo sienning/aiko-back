@@ -9,7 +9,7 @@ const UserDiscordSchema = new mongoose.Schema({
     admin: { type: String, require: true, default: "joueur" }
 });
 
-const userSchema = mongoose.Schema({
+const userSchema = new mongoose.Schema({
     prenom: { type: String },
     nom: { type: String },
     username: { type: String, require: true, unique: true },
@@ -19,7 +19,7 @@ const userSchema = mongoose.Schema({
     avatar: { type: String, default: "avatar-default.png" }
 })
 
-// userSchema.plugin(uniValid)
+userSchema.plugin(uniValid)
 
 var discordModel = mongoose.model('discordModel', UserDiscordSchema, "users");
 var userModel = mongoose.model('userModel', userSchema, "users");

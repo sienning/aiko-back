@@ -3,7 +3,7 @@ const { userModel } = require('./../models/user');
 const bcrypt = require('bcryptjs');
 
 // Connexion par le formulaire
-router.post('/login/create-user', (req, res) => {
+router.post('/login/create-user', (req, res, next) => {
     bcrypt.hash(req.body.mdp, 10)
         .then(hash => {
             console.log(req.body.pseudo);
@@ -19,9 +19,9 @@ router.post('/login/create-user', (req, res) => {
 
             user.save()
                 .then(() => res.status(201).json({ message: 'create user' }))
-                .catch(error => res.status(400).json({ error }))
+                .catch(error => console.log(error))
         })
-        .catch(error => res.status(500).json({ error }))
+        .catch(error => res.status(400).json({ error }))
 });
 
 module.exports = router;
