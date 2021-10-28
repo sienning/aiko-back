@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const passport = require('passport');
 const { userModel } = require('./../models/user');
+const bcrypt = require('bcryptjs');
+const jsontoken = require('jsonwebtoken')
 
 //Discord connection tuto
 router.get('/', passport.authenticate('discord'), (res, req) => {
