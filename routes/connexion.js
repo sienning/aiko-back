@@ -8,6 +8,7 @@ const jsontoken = require('jsonwebtoken')
 router.get('/', passport.authenticate('discord'));
 router.get('/redirect', passport.authenticate('discord', {
   failureRedirect: '/forbidden',
+  // successRedirect: 'http://localhost:3000/'
   successRedirect: '/profil'
 }));
 
@@ -16,12 +17,12 @@ router.post('/login', (req, res) => {
     .then(user => {
       console.log(user);
       if (!user) {
-        return res.send({status : "error", message : "Cet utilisateur n'existe pas ! Verifiez votre adresse mail."});
+        return res.send({ status: "error", message: "Cet utilisateur n'existe pas ! Verifiez votre adresse mail." });
       }
       bcrypt.compare(req.body.password, user.password)
         .then(ok => {
           if (!ok) {
-            return res.send({status : "error", message : "Mot de passe incorrect."});
+            return res.send({ status: "error", message: "Mot de passe incorrect." });
           }
           res.status(200).json({
             userInfos: user,

@@ -19,7 +19,10 @@ router.post('/login/create-user', (req, res, next) => {
 
             user.save()
                 .then(() => res.status(201).json({ message: 'create user' }))
-                .catch(error => console.log(error))
+                .catch(error => {
+                    console.log(error)
+                    res.send(error)
+                })
         })
         .catch(error => res.status(400).json({ error }))
 });

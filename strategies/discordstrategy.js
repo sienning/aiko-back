@@ -11,8 +11,7 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser(async (id, done) => {
     console.log("deserializeUser");
     const user = await discordModel.findOne({ discordId: id })
-    if (user)
-        done(null, user);
+    if (user) done(null, user);
 });
 
 passport.use(new DiscordStrategy({
@@ -25,11 +24,10 @@ passport.use(new DiscordStrategy({
     try {
         const user = await discordModel.findOne({ discordId: profile.id });
         console.log(user);
-        
         if (user) {
+            console.log("DEJA LA");
             done(null, user);
-        }
-        else {
+        } else {
             console.log("création user");
             const newUser = await discordModel.create({
                 discordId: profile.id,
@@ -40,19 +38,6 @@ passport.use(new DiscordStrategy({
             console.log(newUser);
             const savedUser = await newUser.save();
             done(null, savedUser);
-
-            // const newUser = new discordModel({
-            //     discordId: profile.id,
-            //     username: profile.username,
-            //     email: profile.email,
-            //     avatar: profile.avatar
-            // });
-            // console.log(newUser);
-            // newUser.save()
-            //     .then(() => res.status(201).json({ message: 'create user' }))
-            //     .catch(error => console.log(error))
-            // const savedUser = await newUser.save();
-            // done(null, savedUser);
         }
     }
     catch (err) {
