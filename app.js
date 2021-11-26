@@ -23,6 +23,8 @@ mongoose.connect(`mongodb+srv://${process.env.DB_LOGIN}:${process.env.DB_PASSWOR
   {
     useNewUrlParser: true,
     useUnifiedTopology: true
+
+    
   })
   .then(() => console.log("db valid"))
   .catch(() => console.log("db error"))
@@ -34,12 +36,12 @@ app.use(session({
     maxAge: 60000 * 60 * 24
   },
   saveUninitialized: false,
-  name : 'discord.oauth2'
+  name: 'discord.oauth2'
 }));
 
 // Discord - Passport
 app.use(passport.initialize());
-app.use(passport.session()); 
+app.use(passport.session());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
