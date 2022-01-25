@@ -32,7 +32,7 @@ router.get('/', isAuthorized, (req, res) => {
     //         { userId: req.user._id }, 'cryptage', { expiresIn: '24h' }
     //     )
     // })
-    res.redirect('http://localhost:3000');
+    res.redirect(process.env.REDIRECT_FRONT);
 });
 
 router.get('/get-profile', isAuthorized, (req, res) => {
@@ -45,7 +45,6 @@ router.get('/get-profile', isAuthorized, (req, res) => {
             { userId: user._id }, 'cryptage', { expiresIn: '24h' }
         )
     })
-    // .redirect('http://localhost:3000');
 });
 
 router.get('/empty-profile', auth, (req, res) => {
