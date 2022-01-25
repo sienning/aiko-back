@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { userModel } = require('./../models/user');
+const { userModel } = require('./../models/user.model');
 const bcrypt = require('bcryptjs');
 
 // Connexion par le formulaire
