@@ -24,18 +24,20 @@ mongoose.connect(`mongodb+srv://${process.env.DB_LOGIN}:${process.env.DB_PASSWOR
     useNewUrlParser: true,
     useUnifiedTopology: true
 
-    
+
   })
   .then(() => console.log("db valid"))
   .catch(() => console.log("db error"))
 
 // Discord
 app.use(session({
+  resave: false,//added 
+  saveUninitialized: true,//added   
+  // secret: settings.cookieSecret,  
+  // key: settings.db,//cookie name  
+  cookie: { maxAge: 1000 * 60 * 60 * 24 * 30 },//30 days  
   secret: 'some random secret',
-  cookie: {
-    maxAge: 60000 * 60 * 24
-  },
-  saveUninitialized: false,
+  // saveUninitialized: false,
   name: 'discord.oauth2'
 }));
 

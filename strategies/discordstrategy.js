@@ -1,11 +1,9 @@
 const DiscordStrategy = require('passport-discord').Strategy;
 const refresh = require('passport-oauth2-refresh');
-
 const passport = require('passport');
-// const DiscordUser = require('../models/discordUser');
 const { discordModel } = require('../models/user.model');
 
-let profileDiscord = {
+global.profileDiscord = {
     refreshToken: "",
     accessToken: "",
 };
@@ -30,22 +28,19 @@ var discordStrat = new DiscordStrategy({
     console.log("use Discord");
     console.log("profile : ", profile);
 
-    profileDiscord.refreshToken = refreshToken;
-    profileDiscord.accessToken = accessToken;
+    global.profileDiscord.refreshToken = refreshToken;
+    global.profileDiscord.accessToken = accessToken;
     try {
         const user = await discordModel.findOne({ discordId: profile.id });
         if (user) {
-            // console.log("DEJA LA");
             done(null, user);
         } else {
-            // console.log("création user");
             const newUser = await discordModel.create({
                 discordId: profile.id,
                 username: profile.username,
                 email: profile.email,
                 avatar: profile.avatar
             });
-            // console.log(newUser);
             const savedUser = await newUser.save();
             done(null, savedUser);
         }
@@ -57,14 +52,14 @@ var discordStrat = new DiscordStrategy({
 });
 refresh.requestNewAccessToken(
     'discord',
-    profileDiscord.refreshToken,
+    global.profileDiscord.refreshToken,
     function (err, accessToken, refreshToken) {
         if (!err) {
             console.log("ON REFRESH");
             console.log("new refreshToken : ", refreshToken);
             console.log("new accessToken : ", accessToken);
-            profileDiscord.refreshToken = refreshToken;
-            profileDiscord.accessToken = accessToken;
+            global.profileDiscord.refreshToken = refreshToken;
+            global.profileDiscord.accessToken = accessToken;
         }
         // You have a new access token, store it in the user object,
         // or use it to make a new request.

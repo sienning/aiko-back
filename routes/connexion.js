@@ -8,6 +8,19 @@ const jsontoken = require('jsonwebtoken')
 
 //Discord connection tuto
 router.get('/', passport.authenticate('discord'));
+
+// router.get('/', (req, res) => {
+//   console.log("connexion");
+//   // res.status(200);
+//   try {
+//     passport.authenticate('discord');
+//   } catch (err) {
+//     console.log(err);
+//     res.status(500);
+//   }
+// });
+
+
 router.get('/redirect', passport.authenticate('discord', {
   failureRedirect: process.env.REDIRECT_FRONT,
   // successRedirect: 'http://localhost:3000/'

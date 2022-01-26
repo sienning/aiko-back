@@ -2,55 +2,42 @@ const router = require('express').Router();
 const jsontoken = require('jsonwebtoken');
 const auth = require('../controller/auth');
 
-let user;
+global.user;
 
 function isAuthorized(req, res, next) {
     console.log("isAuthorized");
-    console.log("global user", user);
-    if(user){
-        console.log("User is logged in.");
+    console.log("global user", global.user);
+    if (global.user) {
         next();
     } else if (req.user) {
-        console.log("User is logged in.");
-        console.log(req.user);
-        user = req.user
+        global.user = req.user
         next();
-    }
-    else {
-        console.log("User is not loged in.");
+    } else {
         res.redirect('/');
     }
 }
 
 router.get('/', isAuthorized, (req, res) => {
     console.log("PROFIL");
-    console.log(user);
-    // res.send({
-    //     userInfos: req.user,
-    //     userId: req.user._id,
-    //     token: jsontoken.sign(
-    //         { userId: req.user._id }, 'cryptage', { expiresIn: '24h' }
-    //     )
-    // })
+    console.log(global.user);
     res.redirect(process.env.REDIRECT_FRONT);
 });
 
 router.get('/get-profile', isAuthorized, (req, res) => {
     console.log("GET PROFILE");
-    console.log(user);
+    console.log(global.user);
     res.send({
-        userInfos: user,
-        userId: user._id,
+        userInfos: global.user,
+        userId: global.user._id,
         token: jsontoken.sign(
-            { userId: user._id }, 'cryptage', { expiresIn: '24h' }
+            { userId: global.user._id }, 'cryptage', { expiresIn: '24h' }
         )
     })
 });
 
 router.get('/empty-profile', auth, (req, res) => {
     console.log("EMPTY PROFILE");
-    console.log(user);
-    user = null;
+    global.user = null;
     res.sendStatus(200);
 });
 
