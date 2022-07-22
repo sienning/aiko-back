@@ -12,4 +12,12 @@ router.get('/see-user/id_user=:id', auth, function (req, res, next) {
     .catch(error => { res.status(500).json({ error }) })
 });
 
+router.put('/see-user/id_user=:id', auth, function (req, res, next) {
+  let id = mongoose.Types.ObjectId(req.params.id);
+  console.log('Update user' + id)
+  userModel.findById(id)
+    .then(user => { res.update(user) })
+    .catch(error => { res.status(500).json({ error }) })
+});
+
 module.exports = router;
