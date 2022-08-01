@@ -15,13 +15,8 @@ const coachSchema = new mongoose.Schema({
 
 coachSchema.plugin(uniValid)
 
-// var discordModel = mongoose.model('discordModel', UserDiscordSchema, "users");
 var coachModel = mongoose.model('coachSchema', coachSchema, "coach");
 
 module.exports = {
-    // discordModel: discordModel,
     coachModel: coachModel
 };
-
-// module.exports = mongoose.model('User', userModel, "users");
-// module.exports = mongoose.model('User', UserSchema, "users");

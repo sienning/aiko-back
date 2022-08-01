@@ -14,9 +14,23 @@ router.get('/see-user/id_user=:id', auth, function (req, res, next) {
 
 router.put('/see-user/id_user=:id', auth, function (req, res, next) {
   let id = mongoose.Types.ObjectId(req.params.id);
-  console.log('Update user' + id)
-  userModel.findOneAndUpdate(id)
-    .then(user => { res.send(user) })
+  let user = req.body.user;
+  console.log('Update user : ' + id)
+  console.log('Update user : ', user)
+
+  const update = {
+    username: user.username.pseudo,
+    idGame: user.idGame.idGame,
+    division: user.division.division,
+    rang: user.rang.rang,
+    mainRole: user.mainRole.mainRole,
+    subRole: user.subRole.subRole
+  }
+
+  userModel.findByIdAndUpdate(id, update)
+    .then(r => {
+      res.sendStatus(204)
+    })
     .catch(error => { res.status(500).json({ error }) })
 });
 

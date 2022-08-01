@@ -26,7 +26,6 @@ const userSchema = new mongoose.Schema({
     rang: { type: String },
     division: { type: String },
     description: { type: String }
-
 })
 
 userSchema.plugin(uniValid)
