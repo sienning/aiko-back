@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 const auth = require('../controller/auth');
-const { userModel } = require('./../models/user');
 const { coachModel } = require('./../models/coach')
 const mongoose = require('mongoose');
 
@@ -20,12 +19,13 @@ router.put('/see-coach/id_coach=:id', auth, function (req, res, next) {
     console.log('Update coach : ', coach)
 
     const update = {
-        // username: user.username.pseudo,
-        // idGame: user.idGame.idGame,
-        // division: user.division.division,
-        // rang: user.rang.rang,
-        // mainRole: user.mainRole.mainRole,
-        // subRole: user.subRole.subRole
+        idGame: coach.idGame.idGame,
+        division: coach.division.division,
+        rang: coach.rang.rang,
+        mainRole: coach.mainRole.mainRole,
+        subRole: coach.subRole.subRole,
+        calendly: coach.calendly.calendly,
+        description: coach.description.description
     }
 
     coachModel.findByIdAndUpdate(id, update)
