@@ -24,7 +24,10 @@ router.put('/see-user/id_user=:id', auth, function (req, res, next) {
     division: user.division.division,
     rang: user.rang.rang,
     mainRole: user.mainRole.mainRole,
-    subRole: user.subRole.subRole
+    subRole: user.subRole.subRole,
+    levelCoach: user.levelCoach.levelCoach,
+    calendlyCoach: user.calendlyCoach.calendlyCoach,
+    descriptionCoach: user.descriptionCoach.descriptionCoach
   }
 
   userModel.findByIdAndUpdate(id, update)

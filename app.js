@@ -15,7 +15,6 @@ var usersRouter = require('./routes/users');
 var connexionRouter = require('./routes/connexion');
 var inscriptionRouter = require('./routes/inscription');
 var profilRouter = require('./routes/profil');
-var coachRouter = requier('./routes/coach');
 
 var app = express();
 app.use(cors());
@@ -57,7 +56,6 @@ app.use('/users', usersRouter);
 app.use('/connexion', connexionRouter);
 app.use('/inscription', inscriptionRouter);
 app.use('/profil', profilRouter);
-app.use('/coachs', coachRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

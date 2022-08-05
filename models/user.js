@@ -20,12 +20,15 @@ const userSchema = new mongoose.Schema({
     discordName: { type: String },
     inGameName: { type: String},
     idGame: { type: String, default: 1 },
-    level: { type: String, default: "Casuel"},
     mainRole: { type: String },
     subRole: { type: String },
     rang: { type: String },
     division: { type: String },
-    description: { type: String }
+    coach: { type: Boolean, default: 1 },
+    certificationCoach: { type: Boolean, default: 1 },
+    descriptionCoach: { type: String },
+    calendlyCoach: { type: String },
+    levelCoach: { type: String, default: "Casuel" },
 })
 
 userSchema.plugin(uniValid)

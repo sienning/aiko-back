@@ -4,7 +4,7 @@ const auth = require('../controller/auth');
 const { coachModel } = require('./../models/coach')
 const mongoose = require('mongoose');
 
-router.get('/see-coach/id_coach=:id', auth, function (req, res, next) {
+router.get('/see-coach/id_user=:id', auth, function (req, res, next) {
     let id = mongoose.Types.ObjectId(req.params.id);
     console.log(id)
     coachModel.findById(id)
@@ -12,7 +12,7 @@ router.get('/see-coach/id_coach=:id', auth, function (req, res, next) {
         .catch(error => { res.status(500).json({ error }) })
 });
 
-router.put('/see-coach/id_coach=:id', auth, function (req, res, next) {
+router.put('/see-coach/id_user=:id', auth, function (req, res, next) {
     let id = mongoose.Types.ObjectId(req.params.id);
     let coach = req.body.coach;
     console.log('Update coach : ' + id)
@@ -25,7 +25,8 @@ router.put('/see-coach/id_coach=:id', auth, function (req, res, next) {
         mainRole: coach.mainRole.mainRole,
         subRole: coach.subRole.subRole,
         calendly: coach.calendly.calendly,
-        description: coach.description.description
+        description: coach.description.description,
+        level: coach.description.level
     }
 
     coachModel.findByIdAndUpdate(id, update)
