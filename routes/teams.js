@@ -1,21 +1,35 @@
 var express = require('express');
 var router = express.Router();
 const auth = require('../controller/auth');
-const { userModel } = require('../models/user.model');
-const mongoose = require('mongoose');
+const teamsSchema = require("../models/team.model");
 
-router.get('/see-user/id_user=:id', auth, function (req, res) {
-  let id = mongoose.Types.ObjectId(req.params.id);
-  userModel.findById(id)
-    .then(user => { res.send(user) })
+router.get('/', auth, function (req, res) {
+  teamsSchema.find()
+    .then(teams => { res.send(teams) })
     .catch(error => { res.status(500).json({ error }) })
 });
 
-router.get('/see-players/id_user=:id_user', auth, function (req, res) {
-  let id = mongoose.Types.ObjectId(req.params.id_user);
-  userModel.find({_id : { $ne: id }, admin : "joueur"})
-    .then(players => { res.send(players) })
+router.get('/get-content/:id', auth, function (req, res) {
+  let id = req.params.id;
+  teamsSchema.findById(id)
+    .then(teams => { res.send(teams) })
     .catch(error => { res.status(500).json({ error }) })
 });
+
+router.post('/create-team', auth, function (req, res) {
+  let team = req.body.team;
+
+  const newTeam = new teamsSchema(team)
+  console.log(newTeam);
+
+  newTeam.save()
+    .then(() => res.status(201).json({ message: 'Team ' + team.nom + " created.", status: 201 }))
+    .catch(error => {
+      console.log(error)
+      res.send(error)
+    })
+});
+
+
 
 module.exports = router;

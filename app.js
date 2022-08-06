@@ -10,13 +10,14 @@ const session = require('express-session');
 const passport = require('passport');
 const discordStrategy = require('./strategies/discordstrategy');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var connexionRouter = require('./routes/connexion');
-var inscriptionRouter = require('./routes/inscription');
-var profilRouter = require('./routes/profil');
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const connexionRouter = require('./routes/connexion');
+const inscriptionRouter = require('./routes/inscription');
+const profilRouter = require('./routes/profil');
+const teamsRouter = require('./routes/teams');
 
-var app = express();
+const app = express();
 app.use(cors());
 
 mongoose.connect(`mongodb+srv://${process.env.DB_LOGIN}:${process.env.DB_PASSWORD}@aiko.cttlk.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`,
@@ -60,6 +61,7 @@ app.use('/users', usersRouter);
 app.use('/connexion', connexionRouter)
 app.use('/inscription', inscriptionRouter)
 app.use('/profil', profilRouter);
+app.use('/teams', teamsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

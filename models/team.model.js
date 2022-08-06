@@ -2,26 +2,26 @@ const mongoose = require('mongoose')
 
 const today = new Date();
 
-const teamSchema = new mongoose.Schema({
+const teamsSchema = new mongoose.Schema({
+    auteur: { type: Object },
     nom: { type: String, required: true, unique: true },
-    avatar: { type: String, default: "equipe-icon.png" },
+    iconSrc: { type: String, default: "equipe-icon.png" },
     banniere: { type: String, default: "banniere-equipe.png" },
     description: { type: String },
-    nblan: { type: Number, default: 0 },
-    nbtournois: { type: Number, default: 0 },
-    succes: { type: Number, default: 0 },
+    nbLan: { type: Number, default: 0 },
+    nbTournois: { type: Number, default: 0 },
+    nbSucces: { type: Number, default: 0 },
     jeux: { type: Array },
     reseaux: { type: Array },
-    auteur: { type: String },
     membres: { type: Array },
     coach: { type: Array },
     staff: { type: Array },
+    succes: { type: Array },
     recrutement: { type: String },
-    tarif: { type: String },
+    tarifs: { type: Number, default: 0 },
     langues: { type: Array },
-    profilsrecherches: { type: Array },
-    filtre: { type: Array },
-    date: { type: Data, default: today }
+    profilRecherche: { type: Object },
+    date: { type: Date, default: today }
 })
 
-module.exports = mongoose.model('Team', teamSchema, "team");
+module.exports = mongoose.model('teamsSchema', teamsSchema, "teams");
