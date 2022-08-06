@@ -12,7 +12,7 @@ router.get('/see-user/id_user=:id', auth, function (req, res, next) {
     .catch(error => { res.status(500).json({ error }) })
 });
 
-router.put('/see-user/id_user=:id', auth, function (req, res, next) {
+router.post('/update-user/id_user=:id', auth, function (req, res, next) {
   let id = mongoose.Types.ObjectId(req.params.id);
   let user = req.body.user;
   console.log('Update user : ' + id)
@@ -29,6 +29,8 @@ router.put('/see-user/id_user=:id', auth, function (req, res, next) {
     calendlyCoach: user.calendlyCoach.calendlyCoach,
     descriptionCoach: user.descriptionCoach.descriptionCoach
   }
+
+  console.log("update : ",update);
 
   userModel.findByIdAndUpdate(id, update)
     .then(r => {
