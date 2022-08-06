@@ -58,8 +58,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/connexion', connexionRouter)
-app.use('/inscription', inscriptionRouter)
+app.use('/connexion', connexionRouter);
+app.use('/inscription', inscriptionRouter);
 app.use('/profil', profilRouter);
 app.use('/teams', teamsRouter);
 
