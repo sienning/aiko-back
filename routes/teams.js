@@ -30,6 +30,19 @@ router.post('/create-team', auth, function (req, res) {
     })
 });
 
+router.post('/update-team/:teamId', auth, function (req, res) {
+  let team = req.body.team;
+  let id = req.params.teamId;
+  const update = team
+
+  teamsSchema.findByIdAndUpdate(id, update)
+    .then(() => res.status(201).json({ message: 'Team ' + team.nom + " updated.", status: 201 }))
+    .catch(error => {
+      console.log(error)
+      res.send(error)
+    })
+});
+
 
 
 module.exports = router;

@@ -25,6 +25,11 @@ router.get('/see-players/id_user=:id_user', auth, function (req, res) {
     .catch(error => { res.status(500).json({ error }) })
 });
 
+router.get('/see-all-coachs', auth, function (req, res) {
+  userModel.find({ coach: "1", admin: "joueur" })
+    .then(coachs => { res.send(coachs) })
+    .catch(error => { res.status(500).json({ error }) })
+});
 
 router.post('/update-user/id_user=:id', auth, function (req, res, next) {
   let id = mongoose.Types.ObjectId(req.params.id);
@@ -43,9 +48,6 @@ router.post('/update-user/id_user=:id', auth, function (req, res, next) {
     calendlyCoach: user.calendlyCoach.calendlyCoach,
     descriptionCoach: user.descriptionCoach.descriptionCoach
   }
-
-  console.log("update : ", update);
-
   userModel.findByIdAndUpdate(id, update)
     .then(r => {
       res.sendStatus(204)

@@ -1,7 +1,7 @@
 const DiscordStrategy = require('passport-discord').Strategy;
 const refresh = require('passport-oauth2-refresh');
 const passport = require('passport');
-const { discordModel } = require('../models/user.model');
+const { userModel } = require('../models/user.model');
 
 global.profileDiscord = {
     refreshToken: "",
@@ -15,7 +15,7 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser(async (id, done) => {
     console.log("deserializeUser");
-    const user = await discordModel.findOne({ discordId: id })
+    const user = await userModel.findOne({ discordId: id })
     if (user) done(null, user);
 });
 
@@ -31,11 +31,14 @@ var discordStrat = new DiscordStrategy({
     global.profileDiscord.refreshToken = refreshToken;
     global.profileDiscord.accessToken = accessToken;
     try {
-        const user = await discordModel.findOne({ discordId: profile.id });
+        console.log(profile.id);
+        let user = await userModel.findOne({ discordId: profile.id });
         if (user) {
-            done(null, user);
+            const update = { avatar: profile.avatar };
+            const newUser = await userModel.findOneAndUpdate({ discordId: profile.id }, update);
+            done(null, newUser);
         } else {
-            const newUser = await discordModel.create({
+            const newUser = await userModel.create({
                 discordId: profile.id,
                 username: profile.username,
                 email: profile.email,

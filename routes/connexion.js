@@ -6,7 +6,7 @@ const { userModel } = require('../models/user.model');
 const bcrypt = require('bcryptjs');
 const jsontoken = require('jsonwebtoken')
 
-//Discord connection tuto
+//Discord connection
 router.get('/', passport.authenticate('discord'));
 
 // router.get('/', (req, res) => {

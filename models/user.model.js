@@ -1,33 +1,27 @@
 const mongoose = require('mongoose')
 const uniValid = require('mongoose-unique-validator')
 
-// const UserDiscordSchema = new mongoose.Schema({
-//     discordId: { type: String, required: true },
-//     username: { type: String, require: true },
-//     email: { type: String, require: true},
-//     avatar: { type: String },
-//     admin: { type: String, require: true, default: "joueur" }
-// });
 
 const userSchema = new mongoose.Schema({
-    prenom: { type: String },
-    nom: { type: String },
+    prenom: { type: String, default: "" },
+    nom: { type: String, default: "" },
     username: { type: String, require: true, unique: true },
     email: { type: String, require: true, unique: true },
     password: { type: String, require: true },
     admin: { type: String, require: true, default: "joueur" },
     avatar: { type: String, default: "avatar-default.png" },
-    discordName: { type: String },
-    inGameName: { type: String},
+    discordId: { type: String, required: true, default: "0" },
+    discordName: { type: String, default: "" },
+    inGameName: { type: String, default: ""},
     idGame: { type: String, default: 1 },
-    mainRole: { type: String },
-    subRole: { type: String },
-    rang: { type: String },
-    division: { type: String },
+    mainRole: { type: String, default: "" },
+    subRole: { type: String, default: "" },
+    rang: { type: String, default: "" },
+    division: { type: String, default: "" },
     coach: { type: Boolean, default: 1 },
     certificationCoach: { type: Boolean, default: 1 },
-    descriptionCoach: { type: String },
-    calendlyCoach: { type: String },
+    descriptionCoach: { type: String, default: "" },
+    calendlyCoach: { type: String, default: "" },
     levelCoach: { type: String, default: "Casuel" },
 })
 
