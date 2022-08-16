@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
     subRole: { type: String, default: "" },
     rang: { type: String, default: "" },
     division: { type: String, default: "" },
-    coach: { type: Boolean, default: 1 },
+    coach: { type: Boolean, default: false },
     certificationCoach: { type: Boolean, default: 1 },
     descriptionCoach: { type: String, default: "" },
     calendlyCoach: { type: String, default: "" },

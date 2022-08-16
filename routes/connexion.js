@@ -1,36 +1,23 @@
-//test heroku
-
 const router = require('express').Router();
 const passport = require('passport');
 const { userModel } = require('../models/user.model');
 const bcrypt = require('bcryptjs');
-const jsontoken = require('jsonwebtoken')
+const jsontoken = require('jsonwebtoken');
 
 //Discord connection
-router.get('/', passport.authenticate('discord'));
-
-// router.get('/', (req, res) => {
-//   console.log("connexion");
-//   // res.status(200);
-//   try {
-//     passport.authenticate('discord');
-//   } catch (err) {
-//     console.log(err);
-//     res.status(500);
-//   }
-// });
-
+router.get('/', passport.authenticate('discord'),
+  function (req, res) {
+    console.log("ON A UNE REPONSE");
+  });
 
 router.get('/redirect', passport.authenticate('discord', {
   failureRedirect: process.env.REDIRECT_FRONT,
-  // successRedirect: 'http://localhost:3000/'
   successRedirect: '/profil'
 }));
 
 router.post('/login', (req, res) => {
   userModel.findOne({ email: req.body.email })
     .then(user => {
-      console.log(user);
       if (!user) {
         return res.send({ status: "error", message: "Cet utilisateur n'existe pas ! Verifiez votre adresse mail." });
       }

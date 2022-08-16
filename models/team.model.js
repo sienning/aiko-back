@@ -21,6 +21,7 @@ const teamsSchema = new mongoose.Schema({
     tarifs: { type: Number, default: 0 },
     langues: { type: Array },
     profilRecherche: { type: Object },
+    candidatures: { type: Array },
     date: { type: Date, default: today }
 })
 

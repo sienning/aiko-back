@@ -2,11 +2,12 @@ const router = require('express').Router();
 const jsontoken = require('jsonwebtoken');
 const auth = require('../controller/auth');
 
-global.user;
+// global.user;
 
 function isAuthorized(req, res, next) {
     console.log("isAuthorized");
-    console.log("global user", global.user);
+    // console.log("req", req);
+    // console.log("global user", global.user);
     if (global.user) {
         next();
     } else if (req.user) {
@@ -19,7 +20,7 @@ function isAuthorized(req, res, next) {
 
 router.get('/', isAuthorized, (req, res) => {
     console.log("PROFIL");
-    console.log(global.user);
+    // console.log(global.user);
     res.redirect(process.env.REDIRECT_FRONT);
 });
 
