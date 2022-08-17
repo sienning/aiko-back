@@ -26,7 +26,7 @@ router.get('/see-players/id_user=:id_user', auth, function (req, res) {
 });
 
 router.get('/see-all-coachs', auth, function (req, res) {
-  userModel.find({ coach: "1", admin: "joueur" })
+  userModel.find({ coach: true })
     .then(coachs => { res.send(coachs) })
     .catch(error => { res.status(500).json({ error }) })
 });
