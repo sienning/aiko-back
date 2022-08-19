@@ -46,12 +46,6 @@ router.post('/update-team/:teamId', auth, function (req, res) {
 router.post('/add-candidature/:teamId', auth, function (req, res) {
   let id = req.params.teamId;
   let newCandidate = req.body.newCandidate;
-<<<<<<< HEAD
-  const update = { $push: { candidatures: newCandidate} }
-
-  teamsSchema.findByIdAndUpdate(id, update)
-    .then(() => res.status(201).json({ message: 'Candidate ' + newCandidate.username + " added.", status: 201 }))
-=======
   const update = { $push: { candidatures: newCandidate } }
 
   teamsSchema.findByIdAndUpdate(id, update)
@@ -74,7 +68,6 @@ router.post('/add-member/:teamId', auth, function (req, res) {
     .then(() => {
       res.status(201).json({ message: 'Candidate ' + newMember.username + " added.", status: 201 })
     })
->>>>>>> e815ab6a93c1c9047df90845eea14fa8ed2da9e2
     .catch(error => {
       console.log(error)
       res.send(error)
@@ -84,11 +77,7 @@ router.post('/add-member/:teamId', auth, function (req, res) {
 router.post('/remove-candidature/:teamId', auth, function (req, res) {
   let id = req.params.teamId;
   let candidate = req.body.candidate;
-<<<<<<< HEAD
-  const update = { $pull: { candidatures: {_id: candidate._id}} }
-=======
   const update = { $pull: { candidatures: { _id: candidate._id } } }
->>>>>>> e815ab6a93c1c9047df90845eea14fa8ed2da9e2
 
   teamsSchema.findByIdAndUpdate(id, update)
     .then(() => res.status(201).json({ message: 'Candidate ' + candidate.username + " removed.", status: 201 }))

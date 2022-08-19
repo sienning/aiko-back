@@ -29,7 +29,7 @@ router.get('/see-all-coachs', auth, function (req, res) {
   userModel.find({ coach: true })
     .then(coachs => { res.send(coachs) })
     .catch(error => { res.status(500).json({ error }) })
-});
+}); 
 
 router.post('/update-user/id_user=:id', auth, function (req, res, next) {
   let id = mongoose.Types.ObjectId(req.params.id);
