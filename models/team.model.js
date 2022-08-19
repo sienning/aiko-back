@@ -22,6 +22,7 @@ const teamsSchema = new mongoose.Schema({
     langues: { type: Array },
     profilRecherche: { type: Object },
     calendlyLink: { type: String },
+    candidatures: { type: Array },
     date: { type: Date, default: today }
 })
 
