@@ -20,12 +20,11 @@ const teamsRouter = require('./routes/teams');
 const app = express();
 app.use(cors());
 
-mongoose.connect(`mongodb+srv://${process.env.DB_LOGIN}:${process.env.DB_PASSWORD}@aiko.cttlk.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`,
+// Connexion à la base de données MongoDB 
+mongoose.connect(`mongodb+srv://${process.env.DB_LOGIN}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}/${process.env.DB_NAME}?retryWrites=true&w=majority`,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true
-
-
   })
   .then(() => console.log("db valid"))
   .catch(() => console.log("db error"))
