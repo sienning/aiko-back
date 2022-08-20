@@ -2,4 +2,8 @@
 
 Backend de l'application Aiko
 
-Démarage : nodemon
+(voir .env.exemple pour les variables d'environnement)
+
+Démarage : 
+- nodemon 
+- npm start
