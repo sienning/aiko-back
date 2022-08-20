@@ -38,6 +38,7 @@ router.post('/update-user/id_user=:id', auth, function (req, res, next) {
   console.log('Update user : ', user)
 
   const update = {
+    avatar: user.avatar.avatar,
     username: user.username.pseudo,
     idGame: user.idGame.idGame,
     division: user.division.division,

@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
     email: { type: String, require: true, unique: true },
     password: { type: String, require: true },
     admin: { type: String, require: true, default: "joueur" },
-    avatar: { type: String, default: "avatar-default.png" },
+    avatar: { type: String, default: "avatar-default-01.png" },
     discordId: { type: String, required: true, default: "0" },
     discordName: { type: String, default: "" },
     inGameName: { type: String, default: ""},
