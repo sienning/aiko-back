@@ -16,6 +16,7 @@ const connexionRouter = require('./routes/connexion');
 const inscriptionRouter = require('./routes/inscription');
 const profilRouter = require('./routes/profil');
 const teamsRouter = require('./routes/teams');
+const notificationAdminRouter = require('./routes/notificationAdmin');
 
 const app = express();
 app.use(cors());
@@ -61,6 +62,7 @@ app.use('/connexion', connexionRouter);
 app.use('/inscription', inscriptionRouter);
 app.use('/profil', profilRouter);
 app.use('/teams', teamsRouter);
+app.use('/notification-admin', notificationAdminRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
